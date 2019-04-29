@@ -1,15 +1,18 @@
 <template>
   <section class="container">
     <myform></myform>
+    <contentslist></contentslist>
   </section>
 </template>
 
 <script>
 import Myform from '~/components/Myform.vue'
+import contentslist from '~/components/contentslist.vue'
 
 export default {
   components: {
-    Myform
+    Myform,
+    contentslist
   }
 }
 </script>

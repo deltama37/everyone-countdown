@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import { db } from "~/plugins/firebase.js";
+import firebase from "@/plugins/firebase.js";
+import moment from "moment";
 export default {
   name: "myform",
   data() {
@@ -29,11 +29,13 @@ export default {
   },
   methods: {
     login() {
+      const db = firebase.firestore()
       db.collection("contents")
         .add({
           content: this.content,
-          insert_timestamp: firestore.Timestamp.now(),
-          name: this.name
+          name: this.name,
+          created_at: moment().unix(),
+          counter: 0
         })
         .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);

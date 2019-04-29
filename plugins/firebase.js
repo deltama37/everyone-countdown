@@ -11,6 +11,4 @@ if (!firebase.apps.length) {
   })
 }
 
-const db = firebase.firestore()
-
-export { db }
+export default firebase
