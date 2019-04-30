@@ -1,33 +1,18 @@
 <template>
   <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
-        everyone-countdown
-      </h1>
-      <h2 class="subtitle">
-        My fabulous Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+    <myform></myform>
+    <contentslist></contentslist>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Myform from '~/components/Myform.vue'
+import contentslist from '~/components/contentslist.vue'
 
 export default {
   components: {
-    Logo
+    Myform,
+    contentslist
   }
 }
 </script>
