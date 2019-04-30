@@ -1,25 +1,66 @@
-<template lang="pug">
-  .form
-    .top
-      img(src="~assets/text.png")
-    .background
-      .content-background
-        img(src="~assets/text_BG.png")
-        .content
-          textarea
-      .name
-        img(src="~assets/name.png")
-      .name-form
-        input(type="text")
-    .button
-      img(src="~assets/btn_yellow.png")
-    .back
-      img(src="~assets/back.png")
+<template>
+  <div class="form">
+    <form @submit.prevent="login">
+      <div class="top">
+        <img src="~assets/text.png">
+      </div>
+      <div class="background">
+        <div class="content-background">
+          <img src="~assets/text_BG.png">
+          <div class="content">
+            <textarea v-model="content" placeholder="投稿" name="content" />
+          </div>
+        </div>
+        <div class="name">
+          <img src="~assets/name.png">
+        </div>
+        <div class="name-form">
+          <input type="text" v-model="name" placeholder="名前" name="name">
+        </div>
+      </div>
+      <div class="button">
+        <button type="submit">
+          <img src="~assets/btn_yellow.png">
+        </button>
+      </div>
+      <div class="back">
+        <img src="~assets/back.png">
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
+import firebase from "@/plugins/firebase.js";
+import moment from "moment";
 export default {
-}
+  name: "myform",
+  data() {
+    return {
+      error: null,
+      content: "",
+      name: ""
+    };
+  },
+  methods: {
+    login() {
+      const db = firebase.firestore();
+      db.collection("contents")
+        .add({
+          content: this.content,
+          name: this.name,
+          created_at: moment().unix(),
+          counter: 0
+        })
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+  }
+};
 </script>
 
 <style lang="sass" scoped>

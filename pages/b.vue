@@ -1,51 +1,111 @@
-<template lang="pug">
-.form
-  .top
-    img(src="~assets/top.png")
-  .countup
-    img(src="~assets/bg_count.png")
-    .year
-      p.big 30
-      p.small 年
-      p.big 365
-      p.small 日
-    .time
-      p.big-big 01
-      p.medium 時
-      p.big-big 23
-      p.medium 分
-      p.big-big 45
-      p.medium 秒
-      p.medium 67
-  .areas
-    img(src="~assets/bg_area.png")
-    img.center(src="~assets/bg_area.png")
-    img(src="~assets/bg_area.png")
-    .content
-      .content-left
-        p.main あああああああああああああああああ
-        p.name みすみ
-      .content-center
-        p.main あああああああああああああああああ
-        p.name みすみ
-      .content-right
-        p.main いいいいいいいいいいいいいいいいい
-        p.name みすみ
-  .hold-on
-    img(src="~assets/icon.png")
-    img.center(src="~assets/icon.png")
-    img(src="~assets/icon.png")
-  .count
-    p 11
-    p.center 11
-    p 11
-  .button
-    img(src="~assets/btn_black.png")
+<template>
+  <div class="form">
+    <div class="top">
+      <img src="~assets/top.png">
+    </div>
+    <div class="countup">
+      <img src="~assets/bg_count.png">
+      <div class="year">
+        <p class="big">30</p>
+        <p class="small">年</p>
+        <p class="big">365</p>
+        <p class="small">日</p>
+      </div>
+      <div class="time">
+        <p class="big-big">01</p>
+        <p class="medium">時</p>
+        <p class="big-big">23</p>
+        <p class="medium">分</p>
+        <p class="big-big">45</p>
+        <p class="medium">秒</p>
+        <p class="medium">67</p>
+      </div>
+    </div>
+    <div class="areas">
+      <img src="~assets/bg_area.png">
+      <img class="center" src="~assets/bg_area.png">
+      <img src="~assets/bg_area.png">
+      <div v-for="(content, index) in contents">
+        <div class="content">
+          <template v-if="(index - 1) % 3 === 0">
+            <div class="content-left">
+              <p class="main">{{content.content}}</p>
+              <p class="name">{{content.name}}</p>
+            </div>
+          </template>
+          <template v-if="(index - 1) % 3 === 1">
+          <div class="content-center">
+            <p class="main">{{content.content}}</p>
+            <p class="name">{{content.name}}</p>
+          </div>
+          </template>
+          <template v-if="(index - 1) % 3 === 2">
+            <div class="content-right">
+              <p class="main">{{content.content}}</p>
+              <p class="name">{{content.name}}</p>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+    <div class="hold-on">
+      <img src="~assets/icon.png">
+      <img class="center" src="~assets/icon.png">
+      <img src="~assets/icon.png">
+    </div>
+    <div class="count">
+      <p>11</p>
+      <p class="center">11</p>
+      <p>11</p>
+    </div>
+    <div class="button">
+      <img src="~assets/btn_black.png">
+    </div>
+  </div>
 </template>
 
 <script>
+import firebase from "@/plugins/firebase.js";
+import moment from "moment";
 export default {
-}
+  name: "contentslist",
+  data() {
+    return {
+      contents: [],
+      counter: 0
+    };
+  },
+  mounted() {
+    const db = firebase.firestore();
+    db.collection("contents")
+      .get()
+      .then(snap => {
+        const array = [];
+        snap.forEach(doc => {
+          var docdata = doc.data();
+          docdata["id"] = doc.id;
+          array.push(docdata);
+        });
+        this.contents = array;
+      });
+  },
+  methods: {
+    addcount(content) {
+      const db = firebase.firestore();
+      var docRef = db.collection("contents").doc(content.id);
+      db.collection("contents")
+        .doc(content.id)
+        .get()
+        .then(doc => {
+          this.counter = doc.data().counter;
+          docRef.update({
+            counter: this.counter + 1
+          });
+          content.counter = this.counter + 1;
+        });
+    }
+  }
+};
 </script>
 
 <style lang="sass" scoped>

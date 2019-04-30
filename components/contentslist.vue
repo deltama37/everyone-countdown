@@ -1,6 +1,5 @@
 <template>
   <div class="contents">
-    <p>aaa</p>
     <div v-for="content in contents" v-bind:key="content.content">
       {{content.content}}
       {{content.id}}
