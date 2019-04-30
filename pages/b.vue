@@ -48,15 +48,15 @@
         </div>
       </div>
     </div>
-    <div class="hold-on">
-      <img src="~assets/icon.png">
-      <img class="center" src="~assets/icon.png">
-      <img src="~assets/icon.png">
-    </div>
     <div class="count">
       <p>11</p>
       <p class="center">11</p>
       <p>11</p>
+    </div>
+    <div class="hold-on">
+      <img src="~assets/icon.png">
+      <img class="center" src="~assets/icon.png">
+      <img src="~assets/icon.png">
     </div>
     <div class="button">
       <img src="~assets/btn_black.png">
@@ -114,7 +114,6 @@ export default {
   background-repeat: repeat
   text-align: center
   min-width: 750px
-
   & .top
     & img
       width: 750px
@@ -204,8 +203,8 @@ export default {
   & .hold-on
     display: flex
     justify-content: center
-    margin-top: -70px
     position: relative
+    padding-bottom: 100vh
     & img
       width: 210px
       height: 130px

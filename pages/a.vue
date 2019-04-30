@@ -123,7 +123,7 @@ export default {
     & img
       width: 600px
   & .back
-    padding-bottom: 50px
+    padding-bottom: 100vh
     & img
       width: 200px
 </style>
