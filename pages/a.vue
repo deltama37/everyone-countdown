@@ -1,20 +1,20 @@
 <template lang="pug">
-  .form  
+  .form
     .top
       img(src="~assets/text.png")
     .background
       .content-background
         img(src="~assets/text_BG.png")
         .content
-          textarea  
-      .name 
+          textarea
+      .name
         img(src="~assets/name.png")
       .name-form
-        input(type="text")  
+        input(type="text")
     .button
       img(src="~assets/btn_yellow.png")
     .back
-      img(src="~assets/back.png")  
+      img(src="~assets/back.png")
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
       box-shadow: none
       outline: 0
       text-align: left
-      font-family: 'Noto Sans Japanese', sans-serif  
+      font-family: 'Noto Sans Japanese', sans-serif
       font-weight: bold
       font-style: oblique
   & .name
@@ -84,5 +84,5 @@ export default {
   & .back
     padding-bottom: 50px
     & img
-      width: 200px    
+      width: 200px
 </style>
